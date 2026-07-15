@@ -1,0 +1,35 @@
+# awx-instance.yml
+apiVersion: awx.ansible.com/v1beta1
+kind: AWX
+metadata:
+  name: awx
+  namespace: awx
+spec:
+  # Service type - use NodePort for local, LoadBalancer for cloud
+  service_type: NodePort
+  nodeport_port: 30080
+
+  # PostgreSQL configuration
+  postgres_configuration_secret: awx-postgres-configuration
+
+  # Resource limits
+  web_resource_requirements:
+    requests:
+      cpu: 500m
+      memory: 1Gi
+    limits:
+      cpu: "2"
+      memory: 4Gi
+
+  task_resource_requirements:
+    requests:
+      cpu: 500m
+      memory: 1Gi
+    limits:
+      cpu: "2"
+      memory: 4Gi
+
+  # Persistent storage for projects
+  projects_persistence: true
+  projects_storage_size: 10Gi
+  projects_storage_access_mode: ReadWriteMany
