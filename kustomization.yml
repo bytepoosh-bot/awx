@@ -4,6 +4,8 @@ kind: Kustomization
 
 resources:
   - github.com/ansible/awx-operator/config/default?ref=2.19.1
+  - awx-postgres-secret.yml
+  - awx-instance.yml
 
 # Set the namespace for the operator
 namespace: awx
